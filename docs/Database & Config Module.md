@@ -150,3 +150,4 @@ import * as Joi from 'joi';
 })
 export class ConfigModule {}
 ```
+DATABASE_URI=mongodb+srv://root:mypassword@localhost.ed4pplj.mongodb.net/
