@@ -1,4 +1,4 @@
-import { UsersService } from './../users/users.service';
+import { UsersService } from '../users/users.service';
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { PassportStrategy } from '@nestjs/passport';
 import { Strategy } from 'passport-local';
