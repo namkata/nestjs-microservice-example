@@ -30,7 +30,6 @@ export class PaymentsService {
       payment_method: 'pm_card_visa',
       currency: 'usd',
     });
-    console.log('213131321dsasadas', email);
     this.notificationsService.emit('notify-email', {
       email,
       text: `Your payments of ${amount} has completed successfully`,

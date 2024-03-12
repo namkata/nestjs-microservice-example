@@ -10,7 +10,6 @@ export class NotificationsController {
   @UsePipes(new ValidationPipe())
   @EventPattern('notify-email')
   async notifyEmail(@Payload() data: NotifyEmailDto) {
-    console.log('213123212121321', data);
     this.notificationsService.notifyEmail(data);
   }
 }
