@@ -34,7 +34,7 @@ export class JwtAuthGuard implements CanActivate {
       })
       .pipe(
         tap((res) => {
-          context.switchToHttp().getRequest<Request>().user = res;
+          context.switchToHttp().getRequest().user = res;
         }),
         map(() => true),
         catchError(() => of(false)),

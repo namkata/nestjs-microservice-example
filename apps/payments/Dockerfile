@@ -4,11 +4,18 @@ FROM node:alpine as development
 WORKDIR /usr/src/app
 
 COPY package.json package-lock.json ./
-RUN npm install -g && npm install
+COPY tsconfig.json tsconfig.json
+COPY nest-cli.json nest-cli.json
 
-COPY . .
+RUN npm install -g pnpm
 
-RUN npm run build
+COPY apps/payments apps/payments
+COPY libs libs
+
+# Install dependencies
+RUN pnpm install -r
+
+RUN pnpm run build payments
 
 # Create a production image
 FROM node:alpine as production
@@ -16,10 +23,12 @@ FROM node:alpine as production
 ARG NODE_ENV=production
 ENV NODE_ENV=${NODE_ENV}
 
+RUN npm install -g pnpm
+
 WORKDIR /usr/src/app
 
 COPY package.json package-lock.json ./
-RUN npm install --only=production
+RUN pnpm install --only=production
 
 COPY --from=development /usr/src/app/dist ./dist
 COPY --from=development /usr/src/app/package.json ./package.json
